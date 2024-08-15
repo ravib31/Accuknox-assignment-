@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeWidget } from "../redux/actions";
-import { DeleteOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 
 function Widget({ category, widget }) {
   const dispatch = useDispatch();
@@ -16,9 +16,9 @@ function Widget({ category, widget }) {
           </p>
           <button
             onClick={() => dispatch(removeWidget(category, widget.id))}
-            className="bg-red-400 hover:bg-red-700 text-white font-bold p-2 rounded inline-flex items-center"
+            className="bg-red-500 hover:bg-red-800 text-white font-bold p-2 rounded inline-flex items-center"
           >
-            <DeleteOutlined />
+           <CloseOutlined />
           </button>
         </div>
       </div>

@@ -3,20 +3,23 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Flex, Progress } from "antd";
 
-// Register the required components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = () => {
+  const threeColors = {
+    "0%": "#C70039",
+    "50%": "#FFC300",
+    "100%": "#B2BEB5",
+  };
+  const labels = [
+    "Passed(7253)",
+    "Not Available(36)",
+    "Warning(681)",
+    "Failed(1689)",
+  ];
   const data = {
-    labels: [
-      "Passed(7253)",
-      "Not Available(36)",
-      "Warning(681)",
-      "Failed(1689)",
-    ],
     datasets: [
       {
-        // label: "My Firs",
         data: [500, 30, 100, 200],
         backgroundColor: [
           "rgb(0, 128, 0)",
@@ -30,23 +33,40 @@ const DoughnutChart = () => {
   };
 
   return (
-    <div>
-      <h2 className=" font-bold text-center text-gray-800">
-        Cloud Account Risk Management
-      </h2>
-      <div className="justify-between mb-4 flex  ">
-        <div className="w-[400px] h-56 bg-white shadow-md rounded-lg m-auto py-2   flex justify-center items-center">
+    <div className="flex items-center justify-center gap-4">
+      <div className="w-1/2 h-56 bg-white shadow-md rounded-lg m-auto p-4 items-center">
+        <h2 className="font-bold text-center text-gray-800">
+          Cloud Account Risk Management
+        </h2>
+        <div className="flex w-full justify-center h-40">
           <Doughnut data={data} />
+          <div className="flex flex-col justify-center items-start px-4">
+            {labels.map((label, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <span
+                  className="inline-block w-4 h-4 mr-2"
+                  style={{
+                    backgroundColor: data.datasets[0].backgroundColor[index],
+                  }}
+                />
+                {label}
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
 
-        <div className="w-[400px] h-56 bg-white shadow-md rounded-lg m-4 p-14">
-          <h2 className=" font-bold text-center text-gray-800">
-            Image Risk Assessment
-          </h2>
-          <Flex gap="small" vertical>
-            <Progress percent={30} />
-            <Progress percent={70} status="exception" />
-          </Flex>
+      <div className="w-1/2 h-56 bg-white shadow-md rounded-lg m-auto p-4 items-center">
+        <h2 className="font-bold text-center text-gray-800">
+          Image Risk Assessment
+        </h2>
+        <div className=" w-full justify-center h-48 my-8 ">
+
+        <Flex gap="small" vertical>
+          <Progress percent={99.9} strokeColor={threeColors} />
+          <Progress percent={70} status="exception" />
+          <Progress percent={100} />
+        </Flex>
         </div>
       </div>
     </div>
